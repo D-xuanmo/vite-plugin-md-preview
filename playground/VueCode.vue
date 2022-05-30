@@ -7,6 +7,10 @@ export default defineComponent({
       type: String,
       default: '',
     },
+    type: {
+      type: String,
+      default: 'PC',
+    }
   },
   setup() {
     const codeEl = ref<HTMLDivElement>()

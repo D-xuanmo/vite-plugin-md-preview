@@ -1,8 +1,9 @@
 {
-  "name": "vite-plugin-md-preview",
-  "version": "0.0.5",
-  "repository": "git@github.com:JasKang/vite-plugin-md-preview.git",
-  "author": "jaskang <jaskang@qq.com>",
+  "name": "@xuanmo/vite-plugin-md-preview",
+  "version": "0.0.1",
+  "private": false,
+  "repository": "git@github.com:D-xuanmo/vite-plugin-md-preview.git",
+  "author": "xuanmo <me@xuanmo.xin>",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",

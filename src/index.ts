@@ -31,7 +31,7 @@ export const transformer = (code: string, file: string) => {
       },
       update(blocks) {
         for (const block of blocks) {
-          // console.log('update', block.path);
+          // console.log('update', block.path)
           vueBlockMap.set(`${block.path}`, block.code)
         }
       },
@@ -68,8 +68,7 @@ export function MarkdownVuePreview(options: MarkdownVuePreviewOptions = {}): Plu
     },
     load(id) {
       if (VUE_CODE_REGEXP.test(id)) {
-        const code = vueBlockMap.get(id)
-        return code
+        return vueBlockMap.get(id)
       }
     },
     async handleHotUpdate(ctx) {

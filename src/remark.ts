@@ -55,9 +55,11 @@ export function remarkVue(options: RemarkVueOptions): Plugin {
         blocks.push({ name, path: resolve(`./${name}.vue`), code: node.value })
         const demoNode: HTML = {
           type: 'html',
-          value: `<${component} source="${encodeURIComponent(code)}" type="${attrs.type ?? 'PC'}">
-            <${name} />
-          </${component}>`,
+          value: `<${component} source="${encodeURIComponent(code)}" type="${attrs.type ?? 'PC'}" playground="${
+            attrs.playground
+          }">
+              <${name} />
+            </${component}>`,
         }
         parent.children.splice(i, 1, demoNode)
       }

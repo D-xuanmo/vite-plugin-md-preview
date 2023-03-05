@@ -48,7 +48,7 @@ export function remarkVue(options: RemarkVueOptions): Plugin {
         return prev
       }, {} as Record<string, string | boolean>)
 
-      if (node.lang === 'vue' && (attrs.preview || attrs.playground)) {
+      if (node.lang === 'vue') {
         const name = `VueCode${md5(file).substr(0, 8)}I${i}`
         const component = typeof attrs.preview === 'string' ? attrs.preview : 'VueCode'
         const code = highlighter(node.value)

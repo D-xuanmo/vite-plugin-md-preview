@@ -1,6 +1,6 @@
 {
   "name": "@xuanmo/vite-plugin-md-preview",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "private": false,
   "repository": "git@github.com:D-xuanmo/vite-plugin-md-preview.git",
   "author": "xuanmo <me@xuanmo.xin>",

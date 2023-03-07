@@ -49,15 +49,15 @@ export function remarkVue(options: RemarkVueOptions): Plugin {
       }, {} as Record<string, string | boolean>)
 
       if (node.lang === 'vue') {
-        const name = `VueCode${md5(file).substr(0, 8)}I${i}`
+        const name = `VueCode${md5(file).substring(0, 8)}I${i}`
         const component = typeof attrs.preview === 'string' ? attrs.preview : 'VueCode'
         const code = highlighter(node.value)
         blocks.push({ name, path: resolve(`./${name}.vue`), code: node.value })
         const demoNode: HTML = {
           type: 'html',
-          value: `<${component} source="${encodeURIComponent(code)}" type="${attrs.type ?? 'PC'}" playground="${
-            attrs.playground
-          }">
+          value: `<${component} source="${encodeURIComponent(code)}" client="${attrs.type ?? 'PC'}" :perview="${
+            attrs.perview
+          }" playground="${attrs.playground}">
               <${name} />
             </${component}>`,
         }

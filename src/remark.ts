@@ -55,9 +55,9 @@ export function remarkVue(options: RemarkVueOptions): Plugin {
         blocks.push({ name, path: resolve(`./${name}.vue`), code: node.value })
         const demoNode: HTML = {
           type: 'html',
-          value: `<${component} source="${encodeURIComponent(code)}" client="${attrs.type ?? 'PC'}" :perview="${
+          value: `<${component} source="${encodeURIComponent(code)}" client="${attrs.type ?? 'PC'}" :preview="${
             attrs.perview
-          }" playground="${attrs.playground}">
+          }" playground="${attrs.playground}" :width="${attrs.width}" :height="${attrs.height}">
               <${name} />
             </${component}>`,
         }

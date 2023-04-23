@@ -8,12 +8,6 @@ function md5(str: string): string {
   return createHash('md5').update(str).digest('hex')
 }
 
-// interface Code {
-//   type: 'code'
-//   lang?: string
-//   meta?: string
-// }
-
 const fileCodeMap = new Map<string, string[]>()
 
 export type CodeBlock = { name: string; path: string; code: string }
@@ -38,12 +32,15 @@ export function remarkVue(options: RemarkVueOptions): Plugin {
     const oldBlocks = fileCodeMap.get(file) || []
     const blocks: CodeBlock[] = []
     visit(tree, 'code', (node: Code, i: number, parent: Parent) => {
+      const params: string[] = []
       const attrs = (node.meta || '').split(' ').reduce((prev, curr) => {
         const [key, value] = curr.split('=')
         if (typeof value === 'undefined') {
           prev[key] = true
+          params.push(`${key}=true`)
         } else {
           prev[key] = value
+          params.push(`${key}=${value}`)
         }
         return prev
       }, {} as Record<string, string | boolean>)
@@ -55,9 +52,7 @@ export function remarkVue(options: RemarkVueOptions): Plugin {
         blocks.push({ name, path: resolve(`./${name}.vue`), code: node.value })
         const demoNode: HTML = {
           type: 'html',
-          value: `<${component} source="${encodeURIComponent(code)}" client="${attrs.type ?? 'PC'}" :preview="${
-            attrs.perview
-          }" playground="${attrs.playground}" :width="${attrs.width}" :height="${attrs.height}">
+          value: `<${component} source="${encodeURIComponent(code)}" params="${params.join('&')}">
               <${name} />
             </${component}>`,
         }

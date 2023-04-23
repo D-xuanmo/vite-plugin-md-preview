@@ -1,1 +1,29 @@
-{ "extends": ["jaskang"] }
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended"
+  ],
+  "rules": {
+    "semi": 0,
+    "indent": [
+      "warn",
+      2
+    ],
+    "vue/multi-word-component-names": 0,
+    "vue/no-v-html": 0,
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-explicit-any": 0
+  }
+}

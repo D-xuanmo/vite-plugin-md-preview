@@ -1,6 +1,7 @@
 import type { Plugin, PluginOption, Update } from 'vite'
 import { getHighlighter, type HighlighterOptions } from 'shiki'
 import { remark } from 'remark'
+import remarkFrontmatter from 'remark-frontmatter'
 import { remarkVue } from './remark'
 
 export type MarkdownVuePreviewOptions = {
@@ -19,19 +20,18 @@ const transformOptions: TransformOptions = {
 
 export const transformer = (code: string, file: string) => {
   const ret = remark()
+    .use(remarkFrontmatter)
     .use(remarkVue, {
       file,
       root: transformOptions.root,
       highlighter: transformOptions.highlighter,
       remove(codePath) {
         for (const name of codePath) {
-          // console.log('remove', name);
           vueBlockMap.delete(`${name}.vue`)
         }
       },
       update(blocks) {
         for (const block of blocks) {
-          // console.log('update', block.path)
           vueBlockMap.set(`${block.path}`, block.code)
         }
       },
@@ -80,7 +80,6 @@ export function MarkdownVuePreview(options: MarkdownVuePreviewOptions = {}): Plu
         for (const [name] of vueBlockMap) {
           const mods = [...(moduleGraph.getModulesByFile(name) || new Set())]
           moduleGraph.onFileChange(name)
-          // console.log(mods);
           for (const mod of mods) {
             updates.push({
               type: `js-update`,

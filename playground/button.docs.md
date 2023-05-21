@@ -1,3 +1,7 @@
+---
+columns: 2
+---
+
 ### Code preview
 
 ```vue preview
